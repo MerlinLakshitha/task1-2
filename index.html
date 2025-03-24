@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Public Space</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        header .logo {
+            font-size: 24px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        section.content {
+            padding: 20px;
+            text-align: center;
+            background-color: white;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .user-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .user-info div {
+            margin: 5px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+
+        .posts {
+            margin-top: 20px;
+        }
+
+        .post {
+            background-color: #fafafa;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .media img {
+            max-width: 100%;
+            margin-top: 10px;
+        }
+
+        .post-actions {
+            margin-top: 10px;
+        }
+
+        button.like-btn, button.comment-btn, button.share-btn {
+            margin-right: 10px;
+        }
+
+        .comments {
+            margin-top: 10px;
+        }
+
+        .comment-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        /* Mobile Menu Toggle Styles */
+        .menu-toggle {
+            display: none;
+        }
+
+        @media screen and (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+                background-color: #333;
+                color: white;
+                font-size: 30px;
+                border: none;
+                padding: 10px;
+                cursor: pointer;
+            }
+
+            nav ul {
+                display: none;
+                list-style: none;
+                padding: 0;
+            }
+
+            nav ul.show {
+                display: block;
+            }
+
+            nav ul li {
+                display: block;
+                margin: 10px 0;
+            }
+
+            section.content {
+                padding: 15px;
+            }
+
+            footer {
+                font-size: 14px;
+            }
+
+            /* Media Queries for Responsiveness */
+            /* For mobile devices (width <= 480px) */
+            @media screen and (max-width: 480px) {
+                header {
+                    padding: 8px;
+                }
+
+                header .logo {
+                    font-size: 18px;
+                }
+
+                nav ul li {
+                    display: block;
+                    margin: 5px 0;
+                }
+
+                section.content {
+                    padding: 10px;
+                }
+
+                footer {
+                    font-size: 12px;
+                }
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>My Website</h1>
+        </div>
+        <nav>
+            <button class="menu-toggle">☰</button>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Content Section -->
+    <section class="content">
+        <h2>Welcome to My Responsive Public Space</h2>
+        <p>This content will adapt based on your screen size. Post updates based on your friend count.</p>
+    </section>
+
+    <!-- Public Space Section -->
+    <div class="container">
+        <header>
+            <h1>Welcome to the Public Space</h1>
+            <p id="status-message">You must have at least one friend to post!</p>
+        </header>
+        
+        <div class="user-info">
+            <div>
+                <label for="friends-count">Friends: </label>
+                <span id="friends-count">0</span>
+            </div>
+            <div>
+                <button id="add-friend">Add Friend</button>
+                <button id="remove-friend">Remove Friend</button>
+            </div>
+        </div>
+        
+        <div class="post-form">
+            <textarea id="post-text" placeholder="What's on your mind?" disabled></textarea>
+            <input type="file" id="file-upload" disabled accept="image/*, video/*" />
+            <button id="submit-post" disabled>Post</button>
+        </div>
+        
+        <div class="posts">
+            <div class="post" id="sample-post">
+                <p class="post-text">Sample post text.</p>
+                <div class="media">
+                    <img src="sample.jpg" alt="Sample image" />
+                </div>
+                <div class="post-actions">
+                    <button class="like-btn">Like</button>
+                    <button class="comment-btn">Comment</button>
+                    <button class="share-btn">Share</button>
+                </div>
+                <div class="comments">
+                    <input type="text" class="comment-input" placeholder="Add a comment..." />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 My Website</p>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const menu = document.querySelector('nav ul');
+            const toggleButton = document.querySelector('.menu-toggle');
+
+            toggleButton.addEventListener('click', () => {
+                menu.classList.toggle('show');
+            });
+        });
+
+        // User Post Management
+        let friendsCount = 0;
+        let postsToday = 0;
+        let canPostToday = false;
+
+        function updateUserStatus() {
+            document.getElementById("friends-count").innerText = friendsCount;
+
+            if (friendsCount === 0) {
+                document.getElementById("status-message").innerText = "You must have at least one friend to post!";
+                disablePostForm();
+            } else if (friendsCount === 1) {
+                document.getElementById("status-message").innerText = "You can post 1 time today.";
+                enablePostForm(1);
+            } else if (friendsCount > 1 && friendsCount <= 10) {
+                document.getElementById("status-message").innerText = "You can post 2 times today.";
+                enablePostForm(2);
+            } else {
+                document.getElementById("status-message").innerText = "You can post multiple times today.";
+                enablePostForm(Infinity);
+            }
+        }
+
+        function enablePostForm(postLimit) {
+            const postTextArea = document.getElementById("post-text");
+            const fileUpload = document.getElementById("file-upload");
+            const submitButton = document.getElementById("submit-post");
+
+            postTextArea.disabled = false;
+            fileUpload.disabled = false;
+            submitButton.disabled = false;
+
+            if (postsToday < postLimit) {
+                submitButton.onclick = () => createPost();
+            } else {
+                submitButton.disabled = true;
+                submitButton.onclick = null;
+            }
+        }
+
+        function disablePostForm() {
+            const postTextArea = document.getElementById("post-text");
+            const fileUpload = document.getElementById("file-upload");
+            const submitButton = document.getElementById("submit-post");
+
+            postTextArea.disabled = true;
+            fileUpload.disabled = true;
+            submitButton.disabled = true;
+        }
+
+        function createPost() {
+            const postText = document.getElementById("post-text").value;
+            const fileUpload = document.getElementById("file-upload").files[0];
+
+            if (postText || fileUpload) {
+                const newPost = document.createElement('div');
+                newPost.classList.add('post');
+
+                const postContent = document.createElement('p');
+                postContent.classList.add('post-text');
+                postContent.innerText = postText || 'No text content';
+
+                const postMedia = document.createElement('div');
+                postMedia.classList.add('media');
+
+                if (fileUpload) {
+                    const fileURL = URL.createObjectURL(fileUpload);
+                    if (fileUpload.type.startsWith('image')) {
+                        const img = document.createElement('img');
+                        img.src = fileURL;
+                        postMedia.appendChild(img);
+                    } else if (fileUpload.type.startsWith('video')) {
+                        const video = document.createElement('video');
+                        video.src = fileURL;
+                        video.controls = true;
+                        postMedia.appendChild(video);
+                    }
+                }
+
+                const postActions = document.createElement('div');
+                postActions.classList.add('post-actions');
+                postActions.innerHTML = `
+                    <button class="like-btn">Like</button>
+                    <button class="comment-btn">Comment</button>
+                    <button class="share-btn">Share</button>
+                `;
+
+                newPost.appendChild(postContent);
+                newPost.appendChild(postMedia);
+                newPost.appendChild(postActions);
+
+                document.querySelector('.posts').prepend(newPost);
+
+                postsToday++;
+                updateUserStatus();
+
+                document.getElementById("post-text").value = '';
+                document.getElementById("file-upload").value = '';
+            }
+        }
+
+        // Friend management
+        document.getElementById("add-friend").addEventListener("click", () => {
+            friendsCount++;
+            updateUserStatus();
+        });
+
+        document.getElementById("remove-friend").addEventListener("click", () => {
+            if (friendsCount > 0) {
+                friendsCount--;
+                updateUserStatus();
+            }
+        });
+
+        // Initial setup
+        updateUserStatus();
+    </script>
+</body>
+</html>
+
